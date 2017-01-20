@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "705988921492",
+    "firebase_url": "https://mi-library-6953b.firebaseio.com",
+    "project_id": "mi-library-6953b",
+    "storage_bucket": "mi-library-6953b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705988921492:android:f2aa9218dbc36ffd",
+        "android_client_info": {
+          "package_name": "com.example.android.milibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705988921492-o8uno7j3t8omajh37k6n94pqp7lbmtrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.milibrary",
+            "certificate_hash": "5DDEB9F665AF339D22309D1C38819C8FF184DE14"
+          }
+        },
+        {
+          "client_id": "705988921492-mema83agsasarnols89tsc4sc47d99f1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvVDf75NC6WTG4KmTMs-LvfAKLWXKsWaY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705988921492-mema83agsasarnols89tsc4sc47d99f1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

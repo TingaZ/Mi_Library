@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.milibrary.AddBooksActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="25dp"
+            android:paddingTop="16dp">
+
+            <ImageButton
+                android:src="@drawable/btn_adds_r"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:id="@+id/imageButton_select"
+                android:background="#00ffffff"
+                android:scaleType="fitCenter"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_book_title"
+                android:layout_below="@+id/imageButton_select"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:hint="Book Title ..."
+                android:background="@drawable/input_outline"
+                android:padding="15dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_book_author"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/editText_book_title"
+                android:layout_alignRight="@+id/editText_book_title"
+                android:layout_alignEnd="@+id/editText_book_title"
+                android:layout_alignLeft="@+id/editText_book_title"
+                android:layout_alignStart="@+id/editText_book_title"
+                android:hint="Book Author ..."
+                android:background="@drawable/input_outline"
+                android:padding="15dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText_book_decription"
+                android:layout_marginTop="24dp"
+                android:layout_below="@+id/editText_book_author"
+                android:layout_alignRight="@+id/editText_book_author"
+                android:layout_alignEnd="@+id/editText_book_author"
+                android:layout_alignLeft="@+id/editText_book_author"
+                android:layout_alignStart="@+id/editText_book_author"
+                android:hint="Book Description ..."
+                android:background="@drawable/input_outline"
+                android:padding="15dp" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
