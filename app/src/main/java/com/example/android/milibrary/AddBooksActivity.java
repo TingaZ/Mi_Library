@@ -3,6 +3,7 @@ package com.example.android.milibrary;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,10 +15,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -31,6 +38,9 @@ public class AddBooksActivity extends AppCompatActivity {
 
     private StorageReference mStorage;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurentUser;
+    private DatabaseReference mDatabaseUser;
 
     private ProgressDialog mProgress;
 
@@ -39,8 +49,11 @@ public class AddBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_books);
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurentUser = mAuth.getCurrentUser();
         mStorage = FirebaseStorage.getInstance().getReference();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Books");
+        mDatabaseUser = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurentUser.getUid());
 
         mBookTitle = (EditText) findViewById(R.id.editText_book_title);
         mBookAuthor = (EditText) findViewById(R.id.editText_book_author);
@@ -52,7 +65,8 @@ public class AddBooksActivity extends AppCompatActivity {
         /*
         * @Override Method for selecting an image from the device
         * */
-        mSelect.setOnClickListener(new View.OnClickListener() {
+        mSelect.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -108,19 +122,53 @@ public class AddBooksActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    final Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
-                    DatabaseReference newPost = mDatabase.push();
-                    newPost.child("title").setValue(title_value);
-                    newPost.child("author").setValue(author);
-                    newPost.child("desc").setValue(desc_value);
-                    newPost.child("image").setValue(downloadUrl.toString());
+
+
+                    //Use ValueEventListener to retrieve the name of the user and store
+                    // it along the {@newBook} to display the person sumbitted the book.
+                    mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                        //@param dataSnapshot returns the data inside the root in
+                        // the database, which we want to get the name under the user uid
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            DatabaseReference newBook = mDatabase.push();
+                            newBook.child("title").setValue(title_value);
+                            newBook.child("author").setValue(author);
+                            newBook.child("desc").setValue(desc_value);
+                            newBook.child("image").setValue(downloadUrl.toString());
+                            newBook.child("uid").setValue(mCurentUser.getUid());
+                            newBook.child("username").setValue(dataSnapshot.child("name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()){
+
+                                        startActivity(new Intent(AddBooksActivity.this, MainActivity.class));
+
+                                    }else {
+                                        Toast.makeText(AddBooksActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+
+
+                        }
+                    });
 
                     mProgress.dismiss();
 
-                    Toast.makeText(AddBooksActivity.this, "Successfully Posted..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBooksActivity.this, "Book Submitted ...", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(AddBooksActivity.this, MainActivity.class));
 
                 }
             });

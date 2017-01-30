@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    >
+    android:layout_margin="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,19 +11,19 @@
         android:orientation="vertical">
 
         <ImageView
-            android:src="@drawable/btn_adds_r"
             android:id="@+id/book_image"
             android:layout_width="match_parent"
             android:layout_height="270dp"
+            android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:adjustViewBounds="true" />
+            android:src="@drawable/btn_adds_r" />
 
         <TextView
             android:id="@+id/book_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Title Goes Here ..."
             android:padding="10dp"
+            android:text="Book Title Goes Here ..."
             android:textSize="16dp"
             android:textStyle="bold" />
 
@@ -32,24 +31,51 @@
             android:id="@+id/book_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Author Goes here ..."
+            android:paddingBottom="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:textStyle="bold"/>
+            android:text="Book Author Goes here ..."
+            android:textStyle="bold" />
 
         <com.borjabravo.readmoretextview.ReadMoreTextView
             android:id="@+id/book_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Book Description Goes here ..."
-            app:trimMode="trimModeLength"
-            app:trimLength="150"
-            app:colorClickableText="@android:color/holo_blue_light"
+            android:paddingBottom="15dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
+            android:text="Book Description Goes here ..."
+            android:textStyle="italic"
+            app:colorClickableText="@android:color/holo_blue_light"
+            app:trimLength="150"
+            app:trimMode="trimModeLength" />
+
+        <TextView
+            android:id="@+id/book_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingBottom="15dp"
-            android:textStyle="italic"/>
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="username"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/like_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="10dp"
+                android:background="#00ffffff"
+                android:scaleType="centerInside"
+                android:src="@drawable/thumb"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

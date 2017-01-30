@@ -5,16 +5,17 @@ package com.example.android.milibrary;
  */
 public class Book {
 
-    String title, author, desc, image;
+    private String title, author, desc, image, username;
 
     public Book() {
     }
 
-    public Book(String author, String desc, String image, String title) {
+    public Book(String author, String desc, String image, String title, String username) {
         this.author = author;
         this.desc = desc;
         this.image = image;
         this.title = title;
+        this.username = username;
     }
 
 
@@ -48,5 +49,13 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
